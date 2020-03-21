@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.shl.proxy</groupId>
+  <artifactId>proxy-test</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.12.1.GA</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <archive>
+            <!--自动添加META-INF/MANIFEST.MF -->
+            <manifest>
+              <addClasspath>true</addClasspath>
+            </manifest>
+            <manifestEntries>
+              <Project-name>${project.name}</Project-name>
+              <Project-version>${project.version}</Project-version>
+              <Premain-Class>com.shl.proxy.agent.AgentMain</Premain-Class>
+              <!--<Agent-Class>com.shl.proxy.agent.AgentMain</Agent-Class>-->
+              <Boot-class-Path>javassist-3.12.1-GA.jar</Boot-class-Path>
+              <!-- Can-Redefine-Classes:不允许对class修改两次 -->
+              <Can-Redefine-Classes>false</Can-Redefine-Classes>
+              <!--<Can-Retransform-Classes>true</Can-Retransform-Classes>-->
+            </manifestEntries>
+          </archive>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
